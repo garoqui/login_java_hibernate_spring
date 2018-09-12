@@ -1,0 +1,42 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+package Webservice;
+
+import Controlador.Login;
+import Modelo.Usuarios;
+import java.util.List;
+import javax.jws.WebMethod;
+import javax.jws.WebParam;
+import javax.jws.WebService;
+
+/**
+ *
+ * @author Usuario
+ */
+@WebService(serviceName = "MiService")
+public class MiService {
+
+    /**
+     * This is a sample web service operation
+     */
+    @WebMethod(operationName = "hello")
+    public String hello(@WebParam(name = "name") String txt) {
+        return "Hello " + txt + " !";
+    }
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "Log")
+    public List<Usuarios> Log(@WebParam(name = "User") String User, @WebParam(name = "Pass") String Pass) {
+       Login login=new Login();
+       //Usuarios usuario=new Usuarios();
+       List<Usuarios> list=login.Validar(User, Pass);
+       
+        return list;
+    }
+}

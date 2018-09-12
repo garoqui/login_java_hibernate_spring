@@ -1,0 +1,30 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+package Controlador;
+
+import Modelo.HibernateUtil;
+import Modelo.Usuarios;
+import java.util.List;
+import org.hibernate.Query;
+import org.hibernate.Session;
+
+
+public class Login {
+    public List<Usuarios> Validar(String User, String Pass)
+    {
+     Session session=HibernateUtil.getSessionFactory().openSession();
+     session.beginTransaction();
+     Query query=session.createQuery("from Usuarios where nickUsuario=:User and passUsuario=:Pass");
+     query.setString("User", User);
+     query.setString("Pass", Pass);
+     List<Usuarios> milist=query.list();
+     session.getTransaction().commit();
+     return milist;   
+    }
+    
+    
+}
